@@ -7,7 +7,7 @@ void input()
 	char ch;					// 키보드로 입력받을 문자
 	int x, y;					// 유저 위치
 
-	for (; 2;)
+	while (2)
 	{
 		ch = getch();
 
