@@ -1,9 +1,13 @@
 #include "Common.h"
 
-char map[24][20];
+char map[25][20];
 
 
-void MapLoding()
+void MapLoding(int stage)
 {
+	char ** Maptemp;
+	LoadingFile(stage, Maptemp);
 
+	memcpy(map, Maptemp, sizeof(map));
 }
+

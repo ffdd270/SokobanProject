@@ -7,6 +7,8 @@ void Update(); //입력
 void Release(); //해제
 
 
+
+
 int main()
 {
 	Init();
@@ -17,4 +19,24 @@ int main()
 	}
 	Release();
 	return 0;
+}
+
+void Init()
+{
+
+}
+
+void Print()
+{
+
+}
+
+void Update()
+{
+
+}
+
+void Release()
+{
+
 }
