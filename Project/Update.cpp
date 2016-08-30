@@ -1,6 +1,7 @@
 #include "Common.h"
 
 int MAXTARGET; // 맵에 있는 타겟의 수를 저장함.
+int NOWONTARGET; //현재 타겟 위에 올라간 배달물의 숫자를 저장함.
 
 void input()
 {
@@ -44,6 +45,11 @@ void input()
 	}
 }
 
+int IsitClear()
+{
+	if ()
+}
+
 void Move(char ch)
 {
 	int dx = 0, dy = 0;
@@ -75,7 +81,32 @@ void Move(char ch)
 			{
 				map[Play.y + (dy * 2)][Play.x + (dx * 2)] = DELIVERY_ON_TARGET;
 			}
-			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)])
+			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == SPACE)
+			{
+				map[Play.y + (dy * 2)][Play.x + (dx * 2)] = DELIVERY;
+			}
+			else
+			{
+				return;
+			}
+		}
+
+		if (map[Play.y + dy][Play.x + dx] == DELIVERY_ON_TARGET)
+		{
+			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == SPACE)
+			{
+				map[Play.y + dy][Play.x + dx] == TARGET;
+				NOWONTARGET++;
+			}
+			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == TARGET)
+			{
+				map[Play.y + dy][Play.x + dx] == PLAYER_ON_TARGET;
+				NOWONTARGET++;
+			}
+			else
+			{
+				return;
+			}
 		}
 	}
 }
