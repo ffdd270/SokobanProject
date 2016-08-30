@@ -9,5 +9,12 @@ void Release(); //«ÿ¡¶
 
 int main()
 {
-
+	Init();
+	while (1)
+	{
+		Print();
+		Update();
+	}
+	Release();
+	return 0;
 }
