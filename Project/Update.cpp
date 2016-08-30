@@ -41,5 +41,24 @@ void Move(char ch)
 {
 	int dx = 0, dy = 0;
 
+	switch (ch)
+	{
+	case LEFT:
+		dx -= 1;
+		break;
+	case RIGHT:
+		dx += 1;
+		break;
+	case UP:
+		dy -= 1;
+		break;
+	case DOWN:
+		dy += 1;
+		break;
+	default:
+		break;
+	}
 
+
+	if (map[Play.])
 }

@@ -18,7 +18,7 @@
 
 enum Sokoban
 {
-	SPACE, PLAYER, TARGET, DELIVERY, //공백, 플레이어, 목표지점, 배달물
+	SPACE, PLAYER, TARGET, DELIVERY, WALL, //공백, 플레이어, 목표지점, 배달물, 벽
 	PLAYER_ON_TARGET, DELIVERY_ON_TARGET,  //타겟위에 플레이어, 타겟위에 배달물
 };
 
@@ -28,7 +28,7 @@ typedef struct Player
 };
 
 extern char map[25][20]; //원형은 MAP 파일에 있음.
-extern Player Play;
+extern Player Play; //플레이어의 좌표
 extern int MAXTARGET; //원형은 Update에...
 
 //MapTool
