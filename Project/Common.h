@@ -39,6 +39,8 @@ void MapLoding(int stage);
 
 //Update
 int IsitClear();
+void Move(char ch);
+void input();
 
 
 

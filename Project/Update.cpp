@@ -1,7 +1,6 @@
 #include "Common.h"
 
 int MAXTARGET; // 맵에 있는 타겟의 수를 저장함.
-#include "Common.h"
 
 void input()
 {
@@ -68,5 +67,11 @@ void Move(char ch)
 	}
 
 
-	if (map[Play.])
+	if (map[Play.y + dy][Play.x + dx] != 4)
+	{
+		if (map[Play.y + dy][Play.x + dx] == DELIVERY)
+		{
+
+		}
+	}
 }
