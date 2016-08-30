@@ -71,7 +71,11 @@ void Move(char ch)
 	{
 		if (map[Play.y + dy][Play.x + dx] == DELIVERY)
 		{
-
+			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == TARGET)
+			{
+				map[Play.y + (dy * 2)][Play.x + (dx * 2)] = DELIVERY_ON_TARGET;
+			}
+			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)])
 		}
 	}
 }

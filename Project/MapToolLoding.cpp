@@ -4,7 +4,7 @@
 void LoadingFile(int stage, char ** InitMap)
 {
 	char str[40];
-	char tempMap[24][20];
+	char tempMap[20][20];
 
 	sprintf(str, "stage%d.txt", stage);
 	FILE * fpmap = fopen(str, "rt");

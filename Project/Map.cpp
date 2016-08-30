@@ -1,6 +1,6 @@
 #include "Common.h"
 
-char map[25][20];
+char map[20][20];
 
 
 void MapLoding(int stage)

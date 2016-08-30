@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define LEFT 75
 #define RIGHT 77
@@ -27,7 +28,7 @@ typedef struct Player
 	int x, y;
 };
 
-extern char map[25][20]; //원형은 MAP 파일에 있음.
+extern char map[20][20]; //원형은 MAP 파일에 있음.
 extern Player Play; //플레이어의 좌표
 extern int MAXTARGET; //원형은 Update에...
 
@@ -42,6 +43,7 @@ int IsitClear();
 void Move(char ch);
 void input();
 
-
+//Gotoxy
+void gotoxy(int x, int y, char * str);
 
 #endif
