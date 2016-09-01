@@ -26,7 +26,7 @@ void Print()
 					break;
 				case WALL :
 					printf("#");
-
+					break;
 				case PLAYER_ON_TARGET :
 					printf("P");
 					break;
