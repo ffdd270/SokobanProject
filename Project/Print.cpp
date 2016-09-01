@@ -1,6 +1,6 @@
 #include "Common.h"
 
-void Print()
+void Printing_Map()
 {
 	int x , y;
 
@@ -10,7 +10,7 @@ void Print()
 		{
 			for (x = 0; x < 20; x++)
 			{
-				switch (map[y][x])
+				switch (e_map[y][x])
 				{
 				case SPACE :
 					printf(" ");
