@@ -19,9 +19,9 @@ void LoadingFile(int stage)
 
 	e_MAXTARGET = fgetc(fpmap) - 48;
 	fgetc(fpmap);
-	e_Play.y = fgetc(fpmap) - 48;
-	fgetc(fpmap); //胶其捞胶 贸府
 	e_Play.x = fgetc(fpmap) - 48;
+	fgetc(fpmap); //胶其捞胶 贸府
+	e_Play.y = fgetc(fpmap) - 48;
 	fgetc(fpmap); //俺青 贸府
 
 	for (int i = 0; i < 20; i++)

@@ -1,12 +1,11 @@
 #include "Common.h"
 
 
+
 void Init();
 void Print(); //출력
 void Update(); //입력
 void Release(); //해제
-
-
 
 
 int main()
@@ -16,6 +15,7 @@ int main()
 	{
 		Print();
 		Update();
+
 	}
 	Release();
 	return 0;
@@ -23,7 +23,9 @@ int main()
 
 void Init()
 {
-	e_NOWSTAGE = 0;
+	e_NOWSTAGE = 1;
+	CursurDisable();
+	LoadingFile(e_NOWSTAGE);
 }
 
 void Print()

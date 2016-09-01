@@ -13,11 +13,12 @@
 #define UP 72
 #define DOWN 80
 
+
 #define MAXSTAGE 10
 
 enum Sokoban
 {
-	SPACE, PLAYER, TARGET, DELIVERY, WALL, //공백, 플레이어, 목표지점, 배달물, 벽
+	SPACE, PLAYER, DELIVERY, TARGET, WALL, //공백, 플레이어, 목표지점, 배달물, 벽
 	PLAYER_ON_TARGET, DELIVERY_ON_TARGET,  //타겟위에 플레이어, 타겟위에 배달물
 };
 
@@ -44,8 +45,10 @@ void input();
 
 //Gotoxy
 void gotoxy(int x, int y, char * str);
+void CursurDisable();
 
 //Print
 void Printing_Map();
+
 
 #endif
