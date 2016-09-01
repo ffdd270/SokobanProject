@@ -2,8 +2,8 @@
 #include <fmod.h>
 #include <io.h>
 
-FMOD_SYSTEM *g_System;  // Note: FMOD system Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
-FMOD_SOUND  **g_arr_Sound;   // Note: FMOD Sound Æ÷ÀÎÅÍ º¯¼ö ¼±¾ğ
+FMOD_SYSTEM *g_System;  // Note: FMOD system í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
+FMOD_SOUND  **g_arr_Sound;   // Note: FMOD Sound í¬ì¸í„° ë³€ìˆ˜ ì„ ì–¸
 
 
 char ** g_arr_songname;
@@ -14,7 +14,7 @@ int g_SongNumber = 0;
 
 void Init()
 {
-	// Note: FMOD »ç¿îµå ÃÊ±âÈ­ ¹× »ç¿îµå ·Îµù
+	// Note: FMOD ì‚¬ìš´ë“œ ì´ˆê¸°í™” ë° ì‚¬ìš´ë“œ ë¡œë”©
 	_finddata_t fd;
 	long handle;
 	int result = 1;
@@ -28,7 +28,7 @@ void Init()
 		exit(1);
 	}
 
-	//°îÀÇ °¹¼ö È®ÀÎ.
+	//ê³¡ì˜ ê°¯ìˆ˜ í™•ì¸.
 	while (result != -1)
 	{
 		result = _findnext(handle, &fd);
@@ -56,7 +56,7 @@ void Init()
 
 void Release()
 {
-	// Note: FMOD ÇØÁ¦
+	// Note: FMOD í•´ì œ
 	for (int i = 0; i < g_SongNumber; i++)
 	{
 		FMOD_Sound_Release(g_arr_Sound[i]);
@@ -69,15 +69,17 @@ void Release()
 
 void Play(int SongNum)
 {
-	static int OldMusic = -1; //ÀüÀ½¾Ç, -1ÀÌ¸é ¾ÆÁ÷ ÀüÀ½¾ÇÀÌ ¾ø¾ú´ø »óÈ²
+	static int OldMusic = -1; //ì „ìŒì•…, -1ì´ë©´ ì•„ì§ ì „ìŒì•…ì´ ì—†ì—ˆë˜ ìƒí™©
 	int MyMusic = SongNum;
 
 	if ((OldMusic != -1) && (OldMusic != MyMusic))
 	{
+		free(g_arr_songname[OldMusic]);
 		FMOD_Sound_Release(g_arr_Sound[OldMusic]);
 	}
 	if (OldMusic != MyMusic)
 	{
+		g_arr_songname = (FMOD_SOUND *)malloc(sizeof(FMOD_SOUND *));
 		FMOD_System_CreateSound(g_System, g_arr_songname[SongNum], FMOD_LOOP_NORMAL, NULL, &g_arr_Sound[SongNum]);
 	}
 	OldMusic = MyMusic;
