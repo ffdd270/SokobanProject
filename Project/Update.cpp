@@ -2,7 +2,7 @@
 
 #define TRUE 1
 #define FALSE 0
-
+#define ISITCHANGE 2
 
 int NOWONTARGET; //현재 타겟 위에 올라간 배달물의 숫자를 저장함.
 
