@@ -42,8 +42,8 @@ void input()
 
 			if (ch == 'p')							// ¸¸¾à ch°¡ 'p'ÀÏ ¶§
 				NOWSTAGE--;   						// ÀÌÀü ¸ÊÀ¸·Î ÀÌµ¿
-
-
+				
+			
 		}
 	}
 }
@@ -52,7 +52,7 @@ int IsitClear()
 {
 	if (NOWONTARGET == e_MAXTARGET)
 	{
-		
+
 	}
 }
 
@@ -79,7 +79,7 @@ void Move(char ch)
 	}
 
 
-	if (e_map[e_Play.y + dy][e_Play.x + dx] != 4)
+	if (e_map[e_Play.y + dy][e_Play.x + dx] != 4)					// (¹è¿­)¸Ê[ÇöÀçyÁÂÇ¥ + ÀÌµ¿yÁÂÇ¥][ÇöÀçxÁÂÇ¥ + ÀÌµ¿xÁÂÇ¥]
 	{
 		if (e_map[e_Play.y + dy][e_Play.x + dx] == DELIVERY)
 		{
