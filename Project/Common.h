@@ -1,6 +1,6 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
-
+#define GIT_PLZ_PULLING 1
 
 #include <stdio.h>
 #include <conio.h>
