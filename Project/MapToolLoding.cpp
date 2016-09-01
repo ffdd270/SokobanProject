@@ -1,7 +1,7 @@
 #include "Common.h"
 
 
-void LoadingFile(int stage, char ** InitMap)
+void LoadingFile(int stage)
 {
 	char str[40];
 	char tempMap[20][20];
@@ -17,11 +17,11 @@ void LoadingFile(int stage, char ** InitMap)
 		exit(0);
 	}
 
-	MAXTARGET = fgetc(fpmap) - 48;
+	e_MAXTARGET = fgetc(fpmap) - 48;
 	fgetc(fpmap);
-	Play.y = fgetc(fpmap) - 48;
+	e_Play.y = fgetc(fpmap) - 48;
 	fgetc(fpmap); //胶其捞胶 贸府
-	Play.x = fgetc(fpmap) - 48;
+	e_Play.x = fgetc(fpmap) - 48;
 	fgetc(fpmap); //俺青 贸府
 
 	for (int i = 0; i < 20; i++)
@@ -33,6 +33,6 @@ void LoadingFile(int stage, char ** InitMap)
 		fgetc(fpmap); //俺青巩磊 贸府.
 	}
 
-	memcpy(InitMap, tempMap, sizeof(tempMap));
+	memcpy(e_map, tempMap, sizeof(tempMap));
 
 }

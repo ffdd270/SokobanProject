@@ -30,6 +30,7 @@ void input()
 			ch = tolower(ch);						// ch의 문자를 소문자로 변환!
 
 			if (ch == 'r')							// 만약 ch가 'r'일 때
+				MapLoding(NOWSTAGE);
 				break;								// 루프 탈출
 
 			if (ch == 'q')							// 만약 ch가 'q'일 때
@@ -49,7 +50,10 @@ void input()
 
 int IsitClear()
 {
-	if ()
+	if (NOWONTARGET == e_MAXTARGET)
+	{
+		
+	}
 }
 
 void Move(char ch)
