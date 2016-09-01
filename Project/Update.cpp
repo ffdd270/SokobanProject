@@ -48,11 +48,18 @@ void input()
 	}
 }
 
-int IsitClear()
+int IsitClear() //클리어 했나요?
 {
 	if (NOWONTARGET == e_MAXTARGET)
 	{
-		
+		if (NOWSTAGE == MAXSTAGE)
+		{
+			system("cls");
+			printf("모든 스테이지가 끝났습니다 ^_^");
+			printf("걸린 시간 : ");
+		}
+		NOWSTAGE++;
+		LoadingFile(NOWSTAGE);
 	}
 }
 
@@ -86,6 +93,7 @@ void Move(char ch)
 			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == TARGET)
 			{
 				e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] = DELIVERY_ON_TARGET;
+				NOWONTARGET++;
 			}
 			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == SPACE)
 			{
@@ -102,7 +110,7 @@ void Move(char ch)
 			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == SPACE)
 			{
 				e_map[e_Play.y + dy][e_Play.x + dx] == TARGET;
-				NOWONTARGET++;
+				NOWONTARGET--;
 			}
 			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == TARGET)
 			{
@@ -114,5 +122,25 @@ void Move(char ch)
 				return;
 			}
 		}
+
+		if (e_map[e_Play.y + dy][e_Play.x + dx] == TARGET)
+		{
+			e_map[e_Play.y][e_Play.x] = SPACE;
+			e_Play.y += dy; e_Play.x += dx;
+			e_map[e_Play.y + dy][e_Play.x + dx] = PLAYER_ON_TARGET;
+			return;
+		}
 	}
+
+	else //벽에 부딫침.
+	{
+		return;
+	}
+
+	e_map[e_Play.y][e_Play.x] = SPACE;
+
+	e_Play.x += dx;
+	e_Play.y += dy;
+
+	e_map[e_Play.y][e_Play.x] = PLAYER;
 }

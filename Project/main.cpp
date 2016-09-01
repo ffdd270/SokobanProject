@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <conio.h>
+#include "Common.h"
+
 
 void Init();
 void Print(); //Ãâ·Â
@@ -23,17 +23,17 @@ int main()
 
 void Init()
 {
-
+	e_NOWSTAGE = 0;
 }
 
 void Print()
 {
-
+	Printing_Map();
 }
 
 void Update()
 {
-
+	input();
 }
 
 void Release()

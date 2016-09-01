@@ -45,4 +45,7 @@ void input();
 //Gotoxy
 void gotoxy(int x, int y, char * str);
 
+//Print
+void Printing_Map();
+
 #endif

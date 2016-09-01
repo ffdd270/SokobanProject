@@ -5,9 +5,6 @@ int e_NOWSTAGE;
 
 void MapLoding(int stage)
 {
-	char ** Maptemp;
-	LoadingFile(stage, Maptemp);
-
-	memcpy(map, Maptemp, sizeof(map));
+	LoadingFile(stage);
 }
 
