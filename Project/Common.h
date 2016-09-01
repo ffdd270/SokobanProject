@@ -15,8 +15,6 @@
 
 #define MAXSTAGE 10
 
-
-
 enum Sokoban
 {
 	SPACE, PLAYER, TARGET, DELIVERY, WALL, //공백, 플레이어, 목표지점, 배달물, 벽
@@ -28,12 +26,13 @@ typedef struct Player
 	int x, y;
 };
 
-extern char map[20][20]; //원형은 MAP 파일에 있음.
-extern Player Play; //플레이어의 좌표
-extern int MAXTARGET; //원형은 Update에...
+extern char e_map[20][20]; //원형은 MAP 파일에 있음.
+extern Player e_Play;   //플레이어의 좌표 원형은 여기.
+extern int e_MAXTARGET; //원형은 Update에...
+extern int e_NOWSTAGE; //원형은 Map에.
 
 //MapTool
-void LoadingFile(int stage, char ** InitMap);
+void LoadingFile(int stage);
 
 //Map
 void MapLoding(int stage); 

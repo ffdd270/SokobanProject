@@ -1,7 +1,8 @@
 #include "Common.h"
 
-int MAXTARGET; // 맵에 있는 타겟의 수를 저장함.
+int e_MAXTARGET; // 맵에 있는 타겟의 수를 저장함.
 int NOWONTARGET; //현재 타겟 위에 올라간 배달물의 숫자를 저장함.
+int NOWSTAGE;
 
 void input()
 {
@@ -34,11 +35,12 @@ void input()
 			if (ch == 'q')							// 만약 ch가 'q'일 때
 				exit(0);							// 게임 종료
 
-			if (ch == 'n')							// 만약 ch가 'p'일 때
-													// 다음 맵으로 이동
+			if (ch == 'n')
+				NOWSTAGE++;                             // 만약 ch가 'n'일 때
+													   // 다음 맵으로 이동
 
 			if (ch == 'p')							// 만약 ch가 'p'일 때
-													// 이전 맵으로 이동
+				NOWSTAGE--;   						// 이전 맵으로 이동
 
 
 		}
@@ -73,17 +75,17 @@ void Move(char ch)
 	}
 
 
-	if (map[Play.y + dy][Play.x + dx] != 4)
+	if (e_map[e_Play.y + dy][e_Play.x + dx] != 4)
 	{
-		if (map[Play.y + dy][Play.x + dx] == DELIVERY)
+		if (e_map[e_Play.y + dy][e_Play.x + dx] == DELIVERY)
 		{
-			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == TARGET)
+			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == TARGET)
 			{
-				map[Play.y + (dy * 2)][Play.x + (dx * 2)] = DELIVERY_ON_TARGET;
+				e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] = DELIVERY_ON_TARGET;
 			}
-			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == SPACE)
+			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == SPACE)
 			{
-				map[Play.y + (dy * 2)][Play.x + (dx * 2)] = DELIVERY;
+				e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] = DELIVERY;
 			}
 			else
 			{
@@ -91,16 +93,16 @@ void Move(char ch)
 			}
 		}
 
-		if (map[Play.y + dy][Play.x + dx] == DELIVERY_ON_TARGET)
+		if (e_map[e_Play.y + dy][e_Play.x + dx] == DELIVERY_ON_TARGET)
 		{
-			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == SPACE)
+			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == SPACE)
 			{
-				map[Play.y + dy][Play.x + dx] == TARGET;
+				e_map[e_Play.y + dy][e_Play.x + dx] == TARGET;
 				NOWONTARGET++;
 			}
-			if (map[Play.y + (dy * 2)][Play.x + (dx * 2)] == TARGET)
+			if (e_map[e_Play.y + (dy * 2)][e_Play.x + (dx * 2)] == TARGET)
 			{
-				map[Play.y + dy][Play.x + dx] == PLAYER_ON_TARGET;
+				e_map[e_Play.y + dy][e_Play.x + dx] == PLAYER_ON_TARGET;
 				NOWONTARGET++;
 			}
 			else
