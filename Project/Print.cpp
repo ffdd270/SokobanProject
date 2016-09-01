@@ -1,6 +1,6 @@
 #include "Common.h"
 
-void Print()
+void Printing_Map()
 {
 	int x , y;
 
