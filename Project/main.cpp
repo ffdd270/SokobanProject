@@ -3,19 +3,24 @@
 
 
 void Init();
-void Print(); //출력
-void Update(); //입력
 void Release(); //해제
 
 
 int main()
 {
 	Init();
+	Printing_Map();
 	while (1)
 	{
-		Print();
-		Update();
-
+		if (e_IsPlaying == true)
+		{
+			UpdatingMusic();
+		}
+		if (_kbhit())
+		{
+			input();
+			Printing_Map();
+		}
 	}
 	Release();
 	return 0;
@@ -26,19 +31,10 @@ void Init()
 	e_NOWSTAGE = 1;
 	CursurDisable();
 	LoadingFile(e_NOWSTAGE);
-}
-
-void Print()
-{
-	Printing_Map();
-}
-
-void Update()
-{
-	input();
+	Sound_Init();
 }
 
 void Release()
 {
-
+	Sound_Release();
 }

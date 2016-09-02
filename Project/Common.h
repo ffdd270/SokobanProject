@@ -27,10 +27,17 @@ typedef struct Player
 	int x, y;
 };
 
-extern char e_map[20][20]; //원형은 MAP 파일에 있음.
-extern Player e_Play;   //플레이어의 좌표 원형은 여기.
-extern int e_MAXTARGET; //원형은 Update에...
-extern int e_NOWSTAGE; //원형은 Map에.
+//Extern Vaule
+
+//Common_Value
+extern char e_map[20][20]; 
+extern Player e_Play;  
+extern int e_MAXTARGET; 
+extern int e_NOWSTAGE; 
+extern bool e_IsPlaying;
+extern int e_NowSong;
+
+//Fuction
 
 //MapTool
 void LoadingFile(int stage);
@@ -50,5 +57,13 @@ void CursurDisable();
 //Print
 void Printing_Map();
 
+//Sound
+void Sound_Init(); //반드시 이함수 먼저 쓸것.
+void PlayingMusic();
+void UpdatingMusic();
+void StopingMusic();
+void PrintMusicList(); 
+void NowPlaying(char * str);
+void Sound_Release();
 
 #endif

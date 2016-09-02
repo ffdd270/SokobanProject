@@ -2,6 +2,7 @@
 
 void Printing_Map()
 {
+	char str[100];
 	int x , y;
 
 	system("cls");
@@ -45,6 +46,7 @@ void Printing_Map()
 	gotoxy(20, 10, "다음 스테이지 : n \n");
 	gotoxy(20, 12, "이전 스테이지 : p \n");
 
-	
-
+	PrintMusicList();
+	NowPlaying(str);
+	gotoxy(0, 24, str);
 }

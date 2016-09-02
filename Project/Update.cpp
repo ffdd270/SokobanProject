@@ -14,6 +14,8 @@ void input()
 
 	ch = getch();
 
+	ch = tolower(ch);						// ch의 문자를 소문자로 변환!
+
 	switch (ch)
 	{
 	case 'w':
@@ -22,29 +24,45 @@ void input()
 	case 'd':
 		Move(ch);							// Move함수에 ch값을 넘긴다
 		break;
-	}
-
-	ch = tolower(ch);						// ch의 문자를 소문자로 변환!
-
-	if (ch == 'r')							// 만약 ch가 'r'일 때
-	{
+	case 'r':
 		LoadingFile(e_NOWSTAGE);			// 루프 탈출
-	}
-
-	if (ch == 'q')							// 만약 ch가 'q'일 때
+		break;
+	case 'q':
 		exit(0);							// 게임 종료
-
-	if (ch == 'n')// 만약 ch가 'n'일 때
-	{
+		break;
+	case 'n':
 		e_NOWSTAGE++;
 		LoadingFile(e_NOWSTAGE);
-	}
-	// 다음 맵으로 이동
-
-	if (ch == 'p')							// 만약 ch가 'p'일 때
-	{
+		break;
+	case 'p':
 		e_NOWSTAGE++;
 		LoadingFile(e_NOWSTAGE);
+		break;
+	case 'm':
+		gotoxy(0, 23, "P : 재생 N : 다음곡 B : 전곡 S : 정지");
+		ch = getch();
+		ch = tolower(ch);
+		switch (ch)
+		{
+		case 'p':
+			e_IsPlaying = true;
+			PlayingMusic();
+			break;
+		case 'n':
+			StopingMusic();
+			e_NowSong++;
+			break;
+		case 'b':
+			StopingMusic();
+			e_NowSong--;
+			break;
+		case 's':
+			e_IsPlaying = false;
+			StopingMusic();
+			break;
+		default:
+			break;
+		}
 	}
 
 	if (IsitClear() == TRUE)
@@ -75,24 +93,6 @@ int IsitClear() //클리어 했나요?
 void Move(char ch)
 {
 	int dx = 0, dy = 0;
-
-	//switch (ch)
-	//{
-	//case LEFT:
-	//	dx -= 1;
-	//	break;
-	//case RIGHT:
-	//	dx += 1;
-	//	break;
-	//case UP:
-	//	dy -= 1;
-	//	break;
-	//case DOWN:
-	//	dy += 1;
-	//	break;
-	//default:
-	//	break;
-	//}
 
 	switch (ch)
 	{

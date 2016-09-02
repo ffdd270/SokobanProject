@@ -4,7 +4,7 @@
 #include <fmod_errors.h>
 FMOD_SYSTEM *g_System;  // Note: FMOD system 포인터 변수 선언
 FMOD_SOUND  **g_arr_Sound;   // Note: FMOD Sound 포인터 변수 선언
-
+FMOD_CHANNEL * g_channel = NULL;
 
 char ** g_arr_songname;
 
@@ -12,7 +12,7 @@ int h_Fsys = 0;
 int h_Fsnd = 0;
 int g_SongNumber = 0;
 
-void Init()
+void FMOD_Init()
 {
 	// Note: FMOD 사운드 초기화 및 사운드 로딩
 	_finddata_t fd;
@@ -31,7 +31,6 @@ void Init()
 	//곡의 갯수 확인.
 	while (result != -1)
 	{
-		printf("File %d : %s\n", g_SongNumber,fd.name);
 		result = _findnext(handle, &fd);
 		g_SongNumber++;
 	}
@@ -55,7 +54,7 @@ void Init()
 	}
 }
 
-void Release()
+void Sound_Release()
 {
 	// Note: FMOD 해제
 	for (int i = 0; i < g_SongNumber; i++)
@@ -86,7 +85,6 @@ FMOD_RESULT Play(int SongNum)
 
 	if ((OldMusic != -1) && (OldMusic != MyMusic))
 	{
-		free(g_arr_songname[OldMusic]);
 		errchk = FMOD_Sound_Release(g_arr_Sound[OldMusic]);
 	}
 	if (OldMusic != MyMusic)
@@ -98,67 +96,116 @@ FMOD_RESULT Play(int SongNum)
 	return errchk;
 }
 
-int main()
+
+void Sound_Init()
 {
-	int nKey;
-	FMOD_CHANNEL * channel = NULL;
-	FMOD_RESULT errchk; //에러 체킹
-	float volume = 0.5f;
-	FMOD_BOOL IsPlaying;
-	int SongNum = 0;
-	Init();
-
-	while (1)
-	{
-
-		if (_kbhit())
-		{
-			nKey = getch();
-			if (nKey == 'q')
-				break;
-
-			switch (nKey)
-			{
-			case 'e':
-				errchk = FMOD_Channel_Stop(channel);
-				SongNum++;
-				break;
-			case 'd':
-				errchk = FMOD_Channel_Stop(channel);
-				SongNum--;
-				break;
-			case 'p':
-				errchk = Play(SongNum);
-				ERRORCALL(errchk);
-				errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[SongNum], 0, &channel);
-				ERRORCALL(errchk);
-				break;
-			case 's':
-				errchk = FMOD_Channel_Stop(channel);
-				break;
-			case 'x':
-				if (volume > -0.01f)
-					volume = 0.0f;
-				volume -= 0.1f;
-				errchk = FMOD_Channel_SetVolume(channel, volume);
-				break;
-			case 'u':
-				volume += 0.1f;
-				if (volume > 1.0f)
-					volume = 1.0f;
-				errchk = FMOD_Channel_SetVolume(channel, volume);
-				break;
-			}
-			printf("Number : %d ", SongNum);
-		}
-		
-		FMOD_Channel_IsPlaying(channel, &IsPlaying);
-		if (IsPlaying == 1)
-		{
-			errchk = FMOD_System_Update(g_System);
-			ERRORCALL(errchk);
-		}
-	}
-	Release();
-	return 0;
+	FMOD_Init();
 }
+
+void PlayingMusic() //다른 함수에서 접근할 함수,
+{
+	FMOD_RESULT errchk; //에러 체킹
+	errchk = Play(e_NowSong);
+	ERRORCALL(errchk);
+	errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[e_NowSong], 0, &g_channel);
+	ERRORCALL(errchk);
+}
+
+void UpdatingMusic()
+{
+	FMOD_RESULT errchk; //에러 체킹
+	FMOD_BOOL IsPlaying; //플레이 하고 있나요?
+
+	FMOD_Channel_IsPlaying(g_channel, &IsPlaying);
+	if (IsPlaying == 1)
+	{
+		errchk = FMOD_System_Update(g_System);
+		ERRORCALL(errchk);
+	}
+}
+
+void StopingMusic()
+{
+	FMOD_Channel_Stop(g_channel);
+}
+
+void NowPlaying(char * str)
+{
+	sprintf(str, "NOW PLAYING %d : %s", e_NowSong, g_arr_songname[e_NowSong]);
+}
+
+void PrintMusicList()
+{
+	char print[100];
+	for (int i = 0; i < g_SongNumber; i++)
+	{
+		sprintf(print, "%d : %s", i, g_arr_songname[i]);
+		gotoxy(40, 10 + i * 2, print);
+	}
+
+}
+//
+//int main()
+//{
+//	int nKey;
+//	FMOD_CHANNEL * channel = NULL;
+//	FMOD_RESULT errchk; //에러 체킹
+//	float volume = 0.5f;
+//	FMOD_BOOL IsPlaying;
+//	int SongNum = 0;
+//	Init();
+//
+//	while (1)
+//	{
+//
+//		if (_kbhit())
+//		{
+//			nKey = getch();
+//			if (nKey == 'q')
+//				break;
+//
+//			switch (nKey)
+//			{
+//			case 'e':
+//				errchk = FMOD_Channel_Stop(channel);
+//				SongNum++;
+//				break;
+//			case 'd':
+//				errchk = FMOD_Channel_Stop(channel);
+//				SongNum--;
+//				break;
+//			case 'p':
+//				errchk = Play(SongNum);
+//				ERRORCALL(errchk);
+//				errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[SongNum], 0, &channel);
+//				ERRORCALL(errchk);
+//				break;
+//			case 's':
+//				errchk = FMOD_Channel_Stop(channel);
+//				break;
+//			case 'x':
+//				if (volume > -0.01f)
+//					volume = 0.0f;
+//				volume -= 0.1f;
+//				errchk = FMOD_Channel_SetVolume(channel, volume);
+//				break;
+//			case 'u':
+//				volume += 0.1f;
+//				if (volume > 1.0f)
+//					volume = 1.0f;
+//				errchk = FMOD_Channel_SetVolume(channel, volume);
+//				break;
+//			}
+//			printf("Number : %d ", SongNum);
+//		}
+//		
+//		FMOD_Channel_IsPlaying(channel, &IsPlaying);
+//		if (IsPlaying == 1)
+//		{
+//			errchk = FMOD_System_Update(g_System);
+//			ERRORCALL(errchk);
+//		}
+//	}
+//	Release();
+//	return 0;
+//}
