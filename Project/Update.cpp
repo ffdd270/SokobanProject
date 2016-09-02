@@ -50,10 +50,12 @@ void input()
 			break;
 		case 'n':
 			StopingMusic();
+			e_IsPlaying = false;
 			e_NowSong++;
 			break;
 		case 'b':
 			StopingMusic();
+			e_IsPlaying = false;
 			e_NowSong--;
 			break;
 		case 's':

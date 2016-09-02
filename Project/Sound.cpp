@@ -92,6 +92,7 @@ FMOD_RESULT Play(int SongNum)
 		g_arr_Sound[MyMusic] = (FMOD_SOUND *)malloc(sizeof(FMOD_SOUND *));
 		errchk = FMOD_System_CreateSound(g_System, g_arr_songname[SongNum], FMOD_LOOP_NORMAL, NULL, &g_arr_Sound[SongNum]);
 	}
+	ERRORCALL(errchk);
 	OldMusic = MyMusic;
 	return errchk;
 }
