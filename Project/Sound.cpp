@@ -83,6 +83,10 @@ FMOD_RESULT Play(int SongNum)
 	FMOD_RESULT errchk;
 	int MyMusic = SongNum;
 
+	if (SongNum == OldMusic) //아무것도 안바뀌었다면.
+	{
+		return FMOD_OK;
+	}
 	if ((OldMusic != -1) && (OldMusic != MyMusic))
 	{
 		errchk = FMOD_Sound_Release(g_arr_Sound[OldMusic]);
@@ -91,6 +95,7 @@ FMOD_RESULT Play(int SongNum)
 	{
 		g_arr_Sound[MyMusic] = (FMOD_SOUND *)malloc(sizeof(FMOD_SOUND *));
 		errchk = FMOD_System_CreateSound(g_System, g_arr_songname[SongNum], FMOD_LOOP_NORMAL, NULL, &g_arr_Sound[SongNum]);
+		errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[e_NowSong], 0, &g_channel);
 	}
 	ERRORCALL(errchk);
 	OldMusic = MyMusic;
@@ -107,9 +112,6 @@ void PlayingMusic() //다른 함수에서 접근할 함수,
 {
 	FMOD_RESULT errchk; //에러 체킹
 	errchk = Play(e_NowSong);
-	ERRORCALL(errchk);
-	errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[e_NowSong], 0, &g_channel);
-	ERRORCALL(errchk);
 }
 
 void UpdatingMusic()
@@ -161,12 +163,26 @@ void NowPlaying(char * str)
 void PrintMusicList()
 {
 	char print[100];
-	for (int i = 0; i < g_SongNumber; i++)
+	int Cursur = e_NowSong;
+	for (int i = 0; i < 10; i++)
 	{
-		sprintf(print, "%d : %s", i, g_arr_songname[i]);
-		gotoxy(40, 10 + i * 2, print);
-	}
+		if (Cursur < 0)
+		{
+			Cursur++;
+		}
 
+		else if (Cursur + i < g_SongNumber)
+		{
+			sprintf(print, "%d : %s", i + Cursur, g_arr_songname[Cursur + i]);
+			gotoxy(40, 10 + i, print);
+		}
+		else
+		{
+			break;
+		}
+		
+	}
+	gotoxy(40, 10, ">");
 }
 
 void PauseMusic()

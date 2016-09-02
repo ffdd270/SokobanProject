@@ -1,5 +1,5 @@
 #include "Common.h"
-
+#include <Windows.h>
 #define TRUE 1
 #define FALSE 0
 #define ISITCHANGE 2
@@ -38,8 +38,36 @@ void input()
 		e_NOWSTAGE++;
 		LoadingFile(e_NOWSTAGE);
 		break;
+	case 'j':
+		StopingMusic();
+		e_IsPlaying = false;
+		e_NowSong++;
+		break;
+	case 'k':
+		StopingMusic();
+		e_IsPlaying = false;
+		e_NowSong--;
+		break;
+	case ' ':
+		e_IsPaused = !e_IsPaused;
+		PauseMusic();
+		break;
 	case 'm':
-		gotoxy(0, 23, "P : 재생 N : 다음곡 B : 전곡 S : 정지 Space : 일시 정지/재생");
+		char str[100];
+		gotoxy(0, 23, "P : 재생  S : 정지");
+		while (1) //지속적인 갱신
+		{
+			if (e_IsPlaying == true)
+			{
+				NowPlaying(str);
+				gotoxy(0, 24, str); //지속적으로 갱신해야해서 따로뺌
+				Sleep(20);
+			}
+			if (_kbhit())
+			{
+				break;
+			}
+		}
 		ch = getch();
 		ch = tolower(ch);
 		switch (ch)
@@ -48,25 +76,9 @@ void input()
 			e_IsPlaying = true;
 			PlayingMusic();
 			break;
-		case 'n':
-			StopingMusic();
-			e_IsPlaying = false;
-			e_NowSong++;
-			break;
-		case 'b':
-			StopingMusic();
-			e_IsPlaying = false;
-			e_NowSong--;
-			break;
 		case 's':
 			e_IsPlaying = false;
 			StopingMusic();
-			break;
-		case ' ':
-			e_IsPaused = !e_IsPaused;
-			PauseMusic();
-			break;
-		default:
 			break;
 		}
 	}
