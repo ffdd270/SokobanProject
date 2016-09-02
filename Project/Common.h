@@ -56,7 +56,7 @@ void MapLoding(int stage);
 //Update
 int IsitClear();
 void Move(char ch);
-void input();
+void input(); void MusicInput();
 
 //Gotoxy
 void gotoxy(int x, int y, char * str);

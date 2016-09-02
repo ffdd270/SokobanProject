@@ -6,38 +6,12 @@
 
 int NOWONTARGET; //현재 타겟 위에 올라간 배달물의 숫자를 저장함.
 
-
-void input()
+void MusicInput()
 {
-	char ch;					// 키보드로 입력받을 문자
-	int x, y;					// 유저 위치
-
-	ch = getch();
-
-	ch = tolower(ch);						// ch의 문자를 소문자로 변환!
-
+	char ch;
+	ch = _getch();
 	switch (ch)
 	{
-	case 'w':
-	case 'a':
-	case 's':
-	case 'd':
-		Move(ch);							// Move함수에 ch값을 넘긴다
-		break;
-	case 'r':
-		LoadingFile(e_NOWSTAGE);			// 루프 탈출
-		break;
-	case 'q':
-		exit(0);							// 게임 종료
-		break;
-	case 'n':
-		e_NOWSTAGE++;
-		LoadingFile(e_NOWSTAGE);
-		break;
-	case 'p':
-		e_NOWSTAGE++;
-		LoadingFile(e_NOWSTAGE);
-		break;
 	case 'j':
 		StopingMusic();
 		e_IsPlaying = false;
@@ -81,6 +55,40 @@ void input()
 			StopingMusic();
 			break;
 		}
+	}
+
+}
+void input()
+{
+	char ch;					// 키보드로 입력받을 문자
+	int x, y;					// 유저 위치
+
+	ch = getch();
+
+	ch = tolower(ch);						// ch의 문자를 소문자로 변환!
+
+	switch (ch)
+	{
+	case 'w':
+	case 'a':
+	case 's':
+	case 'd':
+		Move(ch);							// Move함수에 ch값을 넘긴다
+		break;
+	case 'r':
+		LoadingFile(e_NOWSTAGE);			// 루프 탈출
+		break;
+	case 'q':
+		exit(0);							// 게임 종료
+		break;
+	case 'n':
+		e_NOWSTAGE++;
+		LoadingFile(e_NOWSTAGE);
+		break;
+	case 'p':
+		e_NOWSTAGE++;
+		LoadingFile(e_NOWSTAGE);
+		break;
 	}
 
 	if (IsitClear() == TRUE)

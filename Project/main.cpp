@@ -20,10 +20,14 @@ int main()
 			gotoxy(0, 24, str); //지속적으로 갱신해야해서 따로뺌
 			Sleep(20);
 		}
-		if (_kbhit())
+		if (_kbhit() && e_IsPlaying == true && e_IsPaused == false)
 		{
 			input();
 			Printing_Map();
+		}
+		if (_kbhit())
+		{
+			MusicInput();
 		}
 	}
 	Release();
