@@ -1,5 +1,5 @@
 #include "Common.h"
-
+#include <Windows.h>
 
 
 void Init();
@@ -8,6 +8,7 @@ void Release(); //해제
 
 int main()
 {
+	char str[100];
 	Init();
 	Printing_Map();
 	while (1)
@@ -15,6 +16,9 @@ int main()
 		if (e_IsPlaying == true)
 		{
 			UpdatingMusic();
+			NowPlaying(str);
+			gotoxy(0, 24, str); //지속적으로 갱신해야해서 따로뺌
+			Sleep(20);
 		}
 		if (_kbhit())
 		{

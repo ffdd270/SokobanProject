@@ -47,6 +47,5 @@ void Printing_Map()
 	gotoxy(20, 12, "이전 스테이지 : p \n");
 
 	PrintMusicList();
-	NowPlaying(str);
-	gotoxy(0, 24, str);
+
 }

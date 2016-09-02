@@ -131,7 +131,30 @@ void StopingMusic()
 
 void NowPlaying(char * str)
 {
-	sprintf(str, "NOW PLAYING %d : %s", e_NowSong, g_arr_songname[e_NowSong]);
+	unsigned int nowtime = 0;
+	unsigned int totaltime = 0;
+	int n_arr[3] = { 0 }; //0부터 - 분 / 초 / 밀리
+	int t_arr[3] = { 0 }; // ""
+	FMOD_BOOL    paused = 0;
+
+
+
+	if (e_IsPlaying == true)
+	{
+		FMOD_Sound_GetLength(g_arr_Sound[e_NowSong], &totaltime, FMOD_TIMEUNIT_MS); //음악 전채길이
+		FMOD_Channel_GetPaused(g_channel, &paused); //멈췄나요 ? 
+		FMOD_Channel_GetPosition(g_channel, &nowtime, FMOD_TIMEUNIT_MS); //현재 길이.
+
+		n_arr[0] = nowtime / 1000 / 60;
+		n_arr[1] = nowtime / 1000 % 60;
+		n_arr[2] = nowtime / 10 % 100;
+
+		t_arr[0] = totaltime / 1000 / 60;
+		t_arr[1] = totaltime / 1000 % 60;
+		t_arr[2] = totaltime / 10 % 100;
+	}
+
+	sprintf(str, "%s %d : %s Time : %02d:%02d:%02d / %02d:%02d:%02d", e_IsPaused ? "NOW PLAYING" : "Paused", e_NowSong, g_arr_songname[e_NowSong], n_arr[0], n_arr[1], n_arr[2], t_arr[0], t_arr[1], t_arr[2]);
 }
 
 void PrintMusicList()
@@ -144,6 +167,16 @@ void PrintMusicList()
 	}
 
 }
+
+void PauseMusic()
+{
+	FMOD_BOOL paused;
+
+	FMOD_Channel_GetPaused(g_channel, &paused);
+	FMOD_Channel_SetPaused(g_channel, !paused);
+}
+
+
 //
 //int main()
 //{

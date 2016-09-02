@@ -39,7 +39,7 @@ void input()
 		LoadingFile(e_NOWSTAGE);
 		break;
 	case 'm':
-		gotoxy(0, 23, "P : 재생 N : 다음곡 B : 전곡 S : 정지");
+		gotoxy(0, 23, "P : 재생 N : 다음곡 B : 전곡 S : 정지 Space : 일시 정지/재생");
 		ch = getch();
 		ch = tolower(ch);
 		switch (ch)
@@ -59,6 +59,10 @@ void input()
 		case 's':
 			e_IsPlaying = false;
 			StopingMusic();
+			break;
+		case ' ':
+			e_IsPaused = !e_IsPaused;
+			PauseMusic();
 			break;
 		default:
 			break;

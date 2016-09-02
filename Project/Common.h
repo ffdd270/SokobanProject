@@ -2,6 +2,13 @@
 #define __COMMON_H__
 #define GIT_PLZ_PULLING 1
 
+
+//Made : HSH
+//START : 8월 셋째주
+//END : 160902
+
+//나이스 팀플레이.
+
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -36,6 +43,7 @@ extern int e_MAXTARGET;
 extern int e_NOWSTAGE; 
 extern bool e_IsPlaying;
 extern int e_NowSong;
+extern bool e_IsPaused;
 
 //Fuction
 
@@ -65,5 +73,6 @@ void StopingMusic();
 void PrintMusicList(); 
 void NowPlaying(char * str);
 void Sound_Release();
+void PauseMusic();
 
 #endif
