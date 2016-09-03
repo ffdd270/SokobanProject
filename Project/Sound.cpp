@@ -18,9 +18,9 @@ void FMOD_Init()
 	_finddata_t fd;
 	long handle;
 	int result = 1;
-	handle = _findfirst(".\\*.mp3", &fd);
+	handle = _findfirst(".\\Music\\*.mp3", &fd);
 
-	if (handle == 1)
+	if (handle == -1)
 	{
 		system("cls");
 		printf("system Failed : No Mp3 File in Here. ");
@@ -38,7 +38,7 @@ void FMOD_Init()
 	g_arr_songname = (char **)malloc(sizeof(char *) * g_SongNumber);
 	g_arr_Sound = (FMOD_SOUND **)malloc(sizeof(FMOD_SOUND *)* g_SongNumber);
 
-	handle = _findfirst(".\\*.mp3", &fd);
+	handle = _findfirst(".\\Music\\*.mp3", &fd);
 	int i = 0;
 	result = 0;
 
@@ -47,8 +47,7 @@ void FMOD_Init()
 
 	while (result != -1)
 	{
-		g_arr_songname[i] = (char *)malloc(strlen(fd.name));
-		strcpy(g_arr_songname[i], fd.name);
+		g_arr_songname[i] = strdup(fd.name);
 		result = _findnext(handle, &fd);
 		i++;
 	}
@@ -81,6 +80,7 @@ FMOD_RESULT Play(int SongNum)
 {
 	static int OldMusic = -1; //전음악, -1이면 아직 전음악이 없었던 상황
 	FMOD_RESULT errchk;
+	char str[100];
 	int MyMusic = SongNum;
 
 	if (SongNum == OldMusic) //아무것도 안바뀌었다면.
@@ -94,7 +94,8 @@ FMOD_RESULT Play(int SongNum)
 	if (OldMusic != MyMusic)
 	{
 		g_arr_Sound[MyMusic] = (FMOD_SOUND *)malloc(sizeof(FMOD_SOUND *));
-		errchk = FMOD_System_CreateSound(g_System, g_arr_songname[SongNum], FMOD_LOOP_NORMAL, NULL, &g_arr_Sound[SongNum]);
+		sprintf(str, ".\\Music\\%s", g_arr_songname[SongNum]);
+		errchk = FMOD_System_CreateSound(g_System, str, FMOD_LOOP_NORMAL, NULL, &g_arr_Sound[SongNum]);
 		errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[e_NowSong], 0, &g_channel);
 	}
 	ERRORCALL(errchk);
@@ -157,7 +158,7 @@ void NowPlaying(char * str)
 		t_arr[2] = totaltime / 10 % 100;
 	}
 
-	sprintf(str, "%s %d : %s Time : %02d:%02d:%02d / %02d:%02d:%02d", e_IsPaused ? "NOW PLAYING" : "Paused", e_NowSong, g_arr_songname[e_NowSong], n_arr[0], n_arr[1], n_arr[2], t_arr[0], t_arr[1], t_arr[2]);
+	sprintf(str, "%s %d : %s Time : %02d:%02d:%02d / %02d:%02d:%02d", e_IsPaused ? "Paused" : "NOW PLAYING", e_NowSong, g_arr_songname[e_NowSong], n_arr[0], n_arr[1], n_arr[2], t_arr[0], t_arr[1], t_arr[2]);
 }
 
 void PrintMusicList()
@@ -193,69 +194,3 @@ void PauseMusic()
 	FMOD_Channel_SetPaused(g_channel, !paused);
 }
 
-
-//
-//int main()
-//{
-//	int nKey;
-//	FMOD_CHANNEL * channel = NULL;
-//	FMOD_RESULT errchk; //에러 체킹
-//	float volume = 0.5f;
-//	FMOD_BOOL IsPlaying;
-//	int SongNum = 0;
-//	Init();
-//
-//	while (1)
-//	{
-//
-//		if (_kbhit())
-//		{
-//			nKey = getch();
-//			if (nKey == 'q')
-//				break;
-//
-//			switch (nKey)
-//			{
-//			case 'e':
-//				errchk = FMOD_Channel_Stop(channel);
-//				SongNum++;
-//				break;
-//			case 'd':
-//				errchk = FMOD_Channel_Stop(channel);
-//				SongNum--;
-//				break;
-//			case 'p':
-//				errchk = Play(SongNum);
-//				ERRORCALL(errchk);
-//				errchk = FMOD_System_PlaySound(g_System, FMOD_CHANNEL_FREE, g_arr_Sound[SongNum], 0, &channel);
-//				ERRORCALL(errchk);
-//				break;
-//			case 's':
-//				errchk = FMOD_Channel_Stop(channel);
-//				break;
-//			case 'x':
-//				if (volume > -0.01f)
-//					volume = 0.0f;
-//				volume -= 0.1f;
-//				errchk = FMOD_Channel_SetVolume(channel, volume);
-//				break;
-//			case 'u':
-//				volume += 0.1f;
-//				if (volume > 1.0f)
-//					volume = 1.0f;
-//				errchk = FMOD_Channel_SetVolume(channel, volume);
-//				break;
-//			}
-//			printf("Number : %d ", SongNum);
-//		}
-//		
-//		FMOD_Channel_IsPlaying(channel, &IsPlaying);
-//		if (IsPlaying == 1)
-//		{
-//			errchk = FMOD_System_Update(g_System);
-//			ERRORCALL(errchk);
-//		}
-//	}
-//	Release();
-//	return 0;
-//}

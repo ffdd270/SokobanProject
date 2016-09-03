@@ -6,19 +6,20 @@
 
 int NOWONTARGET; //현재 타겟 위에 올라간 배달물의 숫자를 저장함.
 
-void MusicInput()
+void MusicInput(char ch)
 {
-	char ch;
-	ch = _getch();
+	ch = tolower(ch);
 	switch (ch)
 	{
 	case 'j':
 		StopingMusic();
+		PrintMusicList();
 		e_IsPlaying = false;
 		e_NowSong++;
 		break;
 	case 'k':
 		StopingMusic();
+		PrintMusicList();
 		e_IsPlaying = false;
 		e_NowSong--;
 		break;
@@ -58,12 +59,10 @@ void MusicInput()
 	}
 
 }
-void input()
+void input(char ch)
 {
-	char ch;					// 키보드로 입력받을 문자
 	int x, y;					// 유저 위치
 
-	ch = getch();
 
 	ch = tolower(ch);						// ch의 문자를 소문자로 변환!
 

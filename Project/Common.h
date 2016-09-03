@@ -36,7 +36,8 @@ typedef struct Player
 
 //Extern Vaule
 
-//Common_Value
+//File : Common_Value
+
 extern char e_map[20][20]; 
 extern Player e_Play;  
 extern int e_MAXTARGET; 
@@ -56,7 +57,8 @@ void MapLoding(int stage);
 //Update
 int IsitClear();
 void Move(char ch);
-void input(); void MusicInput();
+void input(char ch); 
+void MusicInput(char ch);
 
 //Gotoxy
 void gotoxy(int x, int y, char * str);
