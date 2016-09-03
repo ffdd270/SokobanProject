@@ -37,7 +37,6 @@ typedef struct Player
 //Extern Vaule
 
 //File : Common_Value
-
 extern char e_map[20][20]; 
 extern Player e_Play;  
 extern int e_MAXTARGET; 
@@ -77,4 +76,6 @@ void NowPlaying(char * str);
 void Sound_Release();
 void PauseMusic();
 
+//ReadLrc
+int InitLRC();
 #endif
