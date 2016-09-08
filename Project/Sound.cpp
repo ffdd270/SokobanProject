@@ -135,8 +135,6 @@ void StopingMusic()
 
 void NowPlaying(char * str)
 {
-	unsigned int nowtime = 0;
-	unsigned int totaltime = 0;
 	int n_arr[3] = { 0 }; //0부터 - 분 / 초 / 밀리
 	int t_arr[3] = { 0 }; // ""
 	FMOD_BOOL    paused = 0;
@@ -157,7 +155,6 @@ void NowPlaying(char * str)
 		t_arr[1] = totaltime / 1000 % 60;
 		t_arr[2] = totaltime / 10 % 100;
 	}
-
 	sprintf(str, "%s %d : %s Time : %02d:%02d:%02d / %02d:%02d:%02d", e_IsPaused ? "Paused" : "NOW PLAYING", e_NowSong, g_arr_songname[e_NowSong], n_arr[0], n_arr[1], n_arr[2], t_arr[0], t_arr[1], t_arr[2]);
 }
 

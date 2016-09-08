@@ -13,15 +13,15 @@ void MusicInput(char ch)
 	{
 	case 'j':
 		StopingMusic();
+		e_NowSong++;
 		PrintMusicList();
 		e_IsPlaying = false;
-		e_NowSong++;
 		break;
 	case 'k':
 		StopingMusic();
+		e_NowSong--;
 		PrintMusicList();
 		e_IsPlaying = false;
-		e_NowSong--;
 		break;
 	case ' ':
 		e_IsPaused = !e_IsPaused;

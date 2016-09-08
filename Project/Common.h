@@ -44,7 +44,8 @@ extern int e_NOWSTAGE;
 extern bool e_IsPlaying;
 extern int e_NowSong;
 extern bool e_IsPaused;
-
+extern unsigned int nowtime;
+extern unsigned int totaltime;
 //Fuction
 
 //MapTool
@@ -78,4 +79,6 @@ void PauseMusic();
 
 //ReadLrc
 int InitLRC();
+int ContorlLRC(int filenum, int PlayTime);
+
 #endif
